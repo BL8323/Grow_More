@@ -2,11 +2,11 @@ import React, { createContext, useReducer, useContext } from 'react';
 
 import Auth from '../reducer/Auth';
 
-import {AuthUserApi, LoginApi} from '../../api/Auth'
+import { AuthUserApi, LoginApi } from '../../api/Auth';
 
 import { authStatusSuccess, setLoading } from '../actions/Auth';
 
-import  Router  from 'next/router';
+import Router from 'next/router';
 
 export const Authcontext = createContext();
 
@@ -40,16 +40,18 @@ function AuthProvider(props) {
       });
   };
 
-  const AuthUser=()=>{
+  const AuthUser = () => {
     dispatch(setLoading(true));
-    AuthUserApi().then((res) => {
-      dispatch(setLoading(false));
-        Router.push('/home');
-      dispatch(authStatusSuccess(res.data));
-    }).catch((err) => {
-      dispatch(setLoading(false));
-    });
-  }
+    AuthUserApi()
+      .then((res) => {
+        dispatch(setLoading(false));
+        // Router.push('/home');
+        dispatch(authStatusSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(setLoading(false));
+      });
+  };
 
   const Auth_api = {
     LoginUser,
